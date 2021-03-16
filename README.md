@@ -10,23 +10,23 @@ A scoresaber api library to easily use functions on the scoresaber API
 *//use the API to navigate to various endpoints*\
 *//and use their functions*\
 *//In this example we are using [Players]*\
-`var playerListNamedSilverhaze = await scoresaberClient.API.Players.ByName("Silverhaze");`\
+`var playerListNamedSilverhaze = await scoresaberClient.API.Players.ByName("Silverhaze");\
 
 
 **What endpoints are there?**\
-`scoresaberClient.API` contains at the moment 3 categories. \
+`scoresaberClient.API` contains at the moment 3 categories.
 
 *Leaderboards*\
-For API calls towards finding the global leaderboard, in the future also country leaderboards etc.\
+For API calls towards finding the global leaderboard, in the future also country leaderboards etc.
 
 *Players*\
-For API calls towards finding info about players/player. By-Name, ByID, Recentsongs, TopSongs etc.\
+For API calls towards finding info about players/player. By-Name, ByID, Recentsongs, TopSongs etc.
 
 *RankingRequests*\
-For API calls towards finding info about maps that are about to get ranked.\
+For API calls towards finding info about maps that are about to get ranked.
  
 
 
 
 *Tags:\
-Scoresaber, Scoresaber api, BeatSaber, Beat Saber api*\
+Scoresaber, Scoresaber api, BeatSaber, Beat Saber api*
