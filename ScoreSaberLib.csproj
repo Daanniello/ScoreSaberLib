@@ -7,10 +7,18 @@
     <PackageTags>Scoresaber</PackageTags>
     <NeutralLanguage></NeutralLanguage>
     <RepositoryUrl>https://github.com/Daanniello/ScoreSaberLib</RepositoryUrl>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\Desktop\License.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
