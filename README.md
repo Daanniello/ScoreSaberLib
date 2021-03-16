@@ -3,7 +3,7 @@
 
 A scoresaber api library to easily use functions on the scoresaber API 
 
-*Examples:* 
+*Examples:* \n 
 **Get a player by name**
 *//create a scoresaber client*
 `var scoresaberClient = new ScoreSaberClient();`
