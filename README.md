@@ -1,0 +1,2 @@
+# ScoreSaberLib
+ Scoresaber API library
