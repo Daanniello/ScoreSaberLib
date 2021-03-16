@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Silverhaze</Authors>
+    <Description>A library for using the ScoreSaber API</Description>
+    <PackageTags>Scoresaber</PackageTags>
+    <NeutralLanguage></NeutralLanguage>
+    <RepositoryUrl>https://github.com/Daanniello/ScoreSaberLib</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
