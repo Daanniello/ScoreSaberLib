@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ScoreSaberLib
 {
-	public class PlayersEndpoint : Endpoint
+	public class Players : Endpoint
 	{
-		public PlayersEndpoint()
+		public Players()
 		{
 
 		}

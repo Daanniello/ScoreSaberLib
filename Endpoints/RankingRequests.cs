@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace ScoreSaberLib
 {
-	public class RankingRequestsEndpoint : Endpoint
+	public class RankingRequests : Endpoint
 	{
-		public RankingRequestsEndpoint()
+		public RankingRequests()
 		{
 
 		}
