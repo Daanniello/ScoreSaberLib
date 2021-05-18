@@ -69,7 +69,7 @@ namespace ScoreSaberLib
 		/// </summary>
 		/// <param name="ID"></param>
 		/// <returns>string</returns>
-		public async Task<string> GetAvatar(ulong ID)
+		public async Task<string> GetAvatarUrl(ulong ID)
 		{
 			using (var client = new HttpClient())
 			{
