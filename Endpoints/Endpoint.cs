@@ -6,7 +6,7 @@ namespace ScoreSaberLib
 {
 	public abstract class Endpoint
 	{
-		readonly string baseURL = "https://new.scoresaber.com/api";
+		readonly string baseURL = "https://scoresaber.com/api";
 
 		protected async Task<T> Get<T>(string endpoint)
 		{

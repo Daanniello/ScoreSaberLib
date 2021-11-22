@@ -1,4 +1,5 @@
 ﻿using ScoreSaberLib.Models;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -11,76 +12,71 @@ namespace ScoreSaberLib
 		{
 
 		}
+        
+        /// <summary>
+        /// Gets a list of players possibly based on filters
+        /// </summary>
+        /// <param name="search"></param>
+        /// <param name="page"></param>
+        /// <param name="countryCodes"></param>
+        /// <returns>list of PlayerInfo or null</returns>
+        public Task<List<PlayerInfoModel.PlayerInfo>> GetPlayers(string search = null, int? page = null, string countryCodes = null)
+        {
+            var extraStatement = "?";
+            if (search != null) extraStatement += $"search={search}&";
+            if (page != null) extraStatement += $"page={page}&";
+            if (countryCodes != null) extraStatement += $"countries={countryCodes}&";
 
-		/// <summary>
-		/// Returns a list of players with minimal info.
-		/// </summary>
-		/// <param name="playerName"></param>
-		/// <returns>PlayersModel or null</returns>
-		public Task<PlayersModel> ByName(string playerName)
-		{
-			return Get<PlayersModel>($"/players/by-name/{playerName}");
-		}
+            return Get< List<PlayerInfoModel.PlayerInfo>>($"/players{extraStatement}");
+        }
 
-		/// <summary>
-		/// Returns a players full info 
-		/// </summary>
-		/// <param name="ID"></param>
-		/// <returns>PlayerModelFull or Null</returns>
-		public Task<PlayerModelFull> ByIDFull(ulong ID)
-		{
-			return Get<PlayerModelFull>($"/player/{ID}/full");
-		}
+        /// <summary>
+        /// Gets the count of players possibly based on filters
+        /// </summary>
+        /// <param name="search"></param>
+        /// <param name="countryCodes"></param>
+        /// <returns>int or null</returns>
+        public Task<int> GetPlayersCount(string search = null, string countryCodes = null)
+        {
+            var extraStatement = "?";
+            if (search != null) extraStatement += $"search={search}&";
+            if (countryCodes != null) extraStatement += $"countries={countryCodes}&";
 
-		/// <summary>
-		/// Returns a players basic info 
-		/// </summary>
-		/// <param name="ID"></param>
-		/// <returns>PlayerModelBasic or Null</returns>
-		public Task<PlayerModelBasic> ByIDBasic(ulong ID)
-		{
-			return Get<PlayerModelBasic>($"/player/{ID}/basic");
-		}
+            return Get<int>($"/players/count{extraStatement}");
+        }
 
-		/// <summary>
-		/// Gets the recent maps played from a user. Only 8 maps each page.
-		/// </summary>
-		/// <param name="ID"></param>
-		/// <param name="page"></param>
-		/// <returns>MapsModel or Null</returns>
-		public Task<MapsModel> GetRecentSongs(ulong ID, int page)
-		{
-			return Get<MapsModel>($"/player/{ID}/scores/recent/{page}");
-		}
+        /// <summary>
+        /// Gets all the players info based on ID
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns>PlayerInfo or null</returns>
+        public Task<PlayerInfoModel.PlayerInfo> GetPlayer(long ID)
+        {
+            return Get<PlayerInfoModel.PlayerInfo>($"/player/{ID}/full");
+        }
 
-		/// <summary>
-		/// Gets the top maps played from a user. Only 8 maps each page.
-		/// </summary>
-		/// <param name="ID"></param>
-		/// <param name="page"></param>
-		/// <returns>MapsModel or Null</returns>
-		public Task<MapsModel> GetTopSongs(ulong ID, int page)
-		{
-			return Get<MapsModel>($"/player/{ID}/scores/top/{page}");
-		}
+        /// <summary>
+        /// Gets scores by player ID with sorts
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="limit"></param>
+        /// <param name="sort"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public Task<List<PlayerScoresModel.PlayerScore>> GetPlayerScores(long ID, int? limit = null, sort? sort = null, int? page = null)
+        {
+            var extraStatement = "?";
+            if (limit != null) extraStatement += $"limit={limit}&";
+            if (sort != null) extraStatement += $"sort={sort}&";
+            if (page != null) extraStatement += $"page={page}&";
 
-		/// <summary>
-		/// Gets the url of an avatar from a user
-		/// </summary>
-		/// <param name="ID"></param>
-		/// <returns>string</returns>
-		public async Task<string> GetAvatarUrl(ulong ID)
-		{
-			using (var client = new HttpClient())
-			{
-				string avatar = null;
-				HttpResponseMessage response = await client.GetAsync($"https://new.scoresaber.com/api/static/avatars/{ID}.jpg");
-				if (response.IsSuccessStatusCode)
-				{
-					avatar = $"https://new.scoresaber.com/api/static/avatars/{ID}.jpg";
-				}
-				return avatar;
-			}
-		}
-	}
+            return Get<List<PlayerScoresModel.PlayerScore>>($"/player/{ID}/scores{extraStatement}");
+        }
+
+        public enum sort
+        {
+            top,
+            recent
+        }
+    }
 }

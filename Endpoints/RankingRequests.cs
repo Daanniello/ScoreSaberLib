@@ -10,23 +10,19 @@ namespace ScoreSaberLib
 
 		}
 
-		/// <summary>
-		/// Gets the requested ranked maps that are going for ranked and are in the queue. 
-		/// In queue means that they are almost going to be qualified.
-		/// </summary>
-		/// <returns>RankedRequestMapsModel or Null</returns>
-		public Task<RankedRequestMapsModel> GetNextInQueue()
-		{
-			return Get<RankedRequestMapsModel>($"/ranking/requests/top");
-		}
+        /// <summary>
+        /// Gets rank request information by requestID
+        /// </summary>
+        /// <param name="requestID"></param>
+        /// <returns>RankRequestModel.Request or null</returns>
+        public Task<Models.RankRequestModel.Request> GetRequest(long requestID)
+        {
+            return Get<Models.RankRequestModel.Request>($"/ranking/request/{requestID}");
+        }
 
-		/// <summary>
-		/// Gets the requested ranked maps that are not in queue yet. They are yet to be reviewed and get into the top queue.
-		/// </summary>
-		/// <returns>RankedRequestMapsModel or Null</returns>
-		public Task<RankedRequestMapsModel> GetOpenRequests()
-		{
-			return Get<RankedRequestMapsModel>($"/ranking/requests/belowTop");
-		}
-	}
+        public Task<Models.RankRequestModel.Request> GetRequestByLeaderboardID(long leaderboardID)
+        {
+            return Get<Models.RankRequestModel.Request>($"/ranking/request/by-id/{leaderboardID}");
+        }
+    }
 }

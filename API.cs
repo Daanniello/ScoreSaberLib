@@ -6,8 +6,8 @@ namespace ScoreSaberLib
 {
     public class API
     {
-        public Players Players = new Players();
         public Leaderboards Leaderboards = new Leaderboards();
+        public Players Players = new Players();        
         public RankingRequests RankingRequests = new RankingRequests();
     }
 }
