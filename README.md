@@ -26,7 +26,7 @@ For API calls towards finding info about players/player. By-Name, ByID, Recentso
 For API calls towards finding info about maps that are about to get ranked.
  
 
-
+For more info: https://docs.scoresaber.com/#/
 
 *Tags:\
 Scoresaber, Scoresaber api, BeatSaber, Beat Saber api*
