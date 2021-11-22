@@ -10,7 +10,7 @@ A scoresaber api library to easily use functions on the scoresaber API
 *//use the API to navigate to various endpoints*\
 *//and use their functions*\
 *//In this example we are using [Players]*\
-`var playerListNamedSilverhaze = await scoresaberClient.API.Players.ByName("Silverhaze")`;
+`var playerListNamedSilverhaze = await scoresaberClient.API.Players.GetPlayers(search: "silverhaze", page: 1, countryCodes: "NL")`;
 
 
 **What endpoints are there?**\
@@ -26,7 +26,7 @@ For API calls towards finding info about players/player. By-Name, ByID, Recentso
 For API calls towards finding info about maps that are about to get ranked.
  
 
-
+For more info: https://docs.scoresaber.com/#/
 
 *Tags:\
 Scoresaber, Scoresaber api, BeatSaber, Beat Saber api*
