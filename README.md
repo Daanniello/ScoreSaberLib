@@ -2,6 +2,7 @@
  Scoresaber API library
 
 A scoresaber api library to easily use functions on the scoresaber API 
+Install with Nuget https://www.nuget.org/packages/ScoreSaberLib/
 
 *Examples:*\
 **Get a player by name**\
