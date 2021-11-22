@@ -15,10 +15,10 @@ Install with Nuget https://www.nuget.org/packages/ScoreSaberLib/
 
 
 **What endpoints are there?**\
-`scoresaberClient.API`
-`scoresaberClient.API.Leaderboards`
-`scoresaberClient.API.Players`
-`scoresaberClient.API.RankingRequests`
+`scoresaberClient.API`\
+`scoresaberClient.API.Leaderboards`\
+`scoresaberClient.API.Players`\
+`scoresaberClient.API.RankingRequests`\
 
 *Leaderboards*\
 For API calls towards finding the global leaderboard, in the future also country leaderboards etc.
