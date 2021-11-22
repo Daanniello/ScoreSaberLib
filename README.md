@@ -10,7 +10,7 @@ A scoresaber api library to easily use functions on the scoresaber API
 *//use the API to navigate to various endpoints*\
 *//and use their functions*\
 *//In this example we are using [Players]*\
-`var playerListNamedSilverhaze = await scoresaberClient.API.Players.ByName("Silverhaze")`;
+`var playerListNamedSilverhaze = await scoresaberClient.API.Players.GetPlayers(search: "silverhaze", page: 1, countryCodes: "NL")`;
 
 
 **What endpoints are there?**\
