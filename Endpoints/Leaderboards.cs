@@ -1,5 +1,6 @@
 ﻿using ScoreSaberLib.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ScoreSaberLib
@@ -23,7 +24,7 @@ namespace ScoreSaberLib
 		/// <param name="sort"></param>
 		/// <param name="unique"></param>
 		/// <returns>LeaderboardMapsModel.Leaderboards or Null</returns>
-		public Task<LeaderboardInfoModel.Leaderboards> GetLeaderboardsByFilter(bool? ranked = null, bool? qualified = null, bool? loved = null, int? minStar = null, int? maxStar = null, Category? category = null, Sort? sort = null, bool? unique = null)
+		public async Task<LeaderboardInfoModel> GetLeaderboardsByFilter(bool? ranked = null, bool? qualified = null, bool? loved = null, int? minStar = null, int? maxStar = null, Category? category = null, Sort? sort = null, bool? unique = null)
 		{
 			var extraStatement = "?";
 			if (ranked != null) extraStatement += $"ranked={ranked}&";
@@ -35,7 +36,8 @@ namespace ScoreSaberLib
 			if (sort != null) extraStatement += $"sort={(int)sort}&";
 			if (unique != null) extraStatement += $"unique={unique}&";
 
-			return Get<LeaderboardInfoModel.Leaderboards>($"/leaderboards{extraStatement}");
+			var result = await Get<LeaderboardInfoModel> ($"/leaderboards{extraStatement}");
+			return result;
 		}
 
 		/// <summary>
@@ -43,9 +45,10 @@ namespace ScoreSaberLib
 		/// </summary>
 		/// <param name="ID"></param>
 		/// <returns>LeaderboardModel or Null</returns>
-		public Task<Models.LeaderboardInfoModel.LeaderboardInfo> GetLeaderboardInfoByID(int ID)
+		public async Task<Models.LeaderboardInfoModel.Leaderboard> GetLeaderboardInfoByID(int ID)
 		{
-			return Get<Models.LeaderboardInfoModel.LeaderboardInfo>($"/leaderboard/by-id/{ID}/info");
+			var result = await Get<Models.LeaderboardInfoModel.Leaderboard>($"/leaderboard/by-id/{ID}/info");
+			return result;
         }
 
 		/// <summary>
@@ -56,13 +59,15 @@ namespace ScoreSaberLib
 		/// <param name="search"></param>
 		/// <param name="page"></param>
 		/// <returns>list of LeaderboardScores or null</returns>
-		public Task<List<Models.LeaderboardScoresModel.LeaderboardScores>> GetLeaderboardScoresByID(int ID, string countryCodes = null, string search = null, int? page = null)
+		public async Task<List<Models.LeaderboardScoresModel.Score>> GetLeaderboardScoresByID(int ID, string countryCodes = null, string search = null, int? page = null)
 		{
 			var extraStatement = "?";
 			if (countryCodes != null) extraStatement += $"countries={countryCodes}&";
 			if (search != null) extraStatement += $"search={search}&";
 			if (page != null) extraStatement += $"page={page}&";
-			return Get<List<Models.LeaderboardScoresModel.LeaderboardScores>>($"/leaderboard/by-id/{ID}/scores{extraStatement}");
+
+			var result = await Get<Models.LeaderboardScoresModel>($"/leaderboard/by-id/{ID}/scores{extraStatement}");
+			return result.Scores;
 		}
 
 		/// <summary>
@@ -71,9 +76,10 @@ namespace ScoreSaberLib
 		/// <param name="hashCode"></param>
 		/// <param name="difficulty"></param>
 		/// <returns>LeaderboardInfo or null</returns>
-		public Task<Models.LeaderboardInfoModel.LeaderboardInfo> GetLeaderboardInfoByHashcode(string hashCode, Difficulty difficulty)
+		public async Task<Models.LeaderboardInfoModel.Leaderboard> GetLeaderboardInfoByHashcode(string hashCode, Difficulty difficulty)
 		{
-			return Get<Models.LeaderboardInfoModel.LeaderboardInfo>($"/leaderboard/by-hash/{hashCode}/info?difficulty={(int)difficulty}");
+			var result = await Get<Models.LeaderboardInfoModel.Leaderboard>($"/leaderboard/by-hash/{hashCode}/info?difficulty={(int)difficulty}");
+			return result;
 		}
 
 		/// <summary>
@@ -85,13 +91,15 @@ namespace ScoreSaberLib
 		/// <param name="search"></param>
 		/// <param name="page"></param>
 		/// <returns>list of LeaderboardScores or null</returns>
-		public Task<List<Models.LeaderboardScoresModel.LeaderboardScores>> GetLeaderboardScoresByHashcode(string hashCode, Difficulty difficulty, string countryCodes = null, string search = null, int? page = null)
+		public async Task<List<Models.LeaderboardScoresModel.Score>> GetLeaderboardScoresByHashcode(string hashCode, Difficulty difficulty, string countryCodes = null, string search = null, int? page = null)
 		{
 			var extraStatement = $"?difficulty={(int)difficulty}&";
 			if (countryCodes != null) extraStatement += $"countries={countryCodes}&";
 			if (search != null) extraStatement += $"search={search}&";
 			if (page != null) extraStatement += $"page={page}&";
-			return Get<List<Models.LeaderboardScoresModel.LeaderboardScores>>($"/leaderboard/by-hash/{hashCode}/scores{extraStatement}");
+
+			var result = await Get<Models.LeaderboardScoresModel>($"/leaderboard/by-hash/{hashCode}/scores{extraStatement}");
+			return result.Scores;
 		}
 
 		/// <summary>

@@ -1,5 +1,6 @@
 ﻿using ScoreSaberLib.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -20,14 +21,14 @@ namespace ScoreSaberLib
         /// <param name="page"></param>
         /// <param name="countryCodes"></param>
         /// <returns>list of PlayerInfo or null</returns>
-        public Task<List<PlayerInfoModel.PlayerInfo>> GetPlayers(string search = null, int? page = null, string countryCodes = null)
+        public Task<PlayerInfoModel> GetPlayers(string search = null, int? page = null, string countryCodes = null)
         {
             var extraStatement = "?";
             if (search != null) extraStatement += $"search={search}&";
             if (page != null) extraStatement += $"page={page}&";
             if (countryCodes != null) extraStatement += $"countries={countryCodes}&";
 
-            return Get< List<PlayerInfoModel.PlayerInfo>>($"/players{extraStatement}");
+            return Get<PlayerInfoModel>($"/players{extraStatement}");
         }
 
         /// <summary>
@@ -50,9 +51,9 @@ namespace ScoreSaberLib
         /// </summary>
         /// <param name="ID"></param>
         /// <returns>PlayerInfo or null</returns>
-        public Task<PlayerInfoModel.PlayerInfo> GetPlayer(long ID)
+        public Task<PlayerInfoModel.Player> GetPlayer(long ID)
         {
-            return Get<PlayerInfoModel.PlayerInfo>($"/player/{ID}/full");
+            return Get<PlayerInfoModel.Player>($"/player/{ID}/full");
         }
 
         /// <summary>
@@ -63,14 +64,15 @@ namespace ScoreSaberLib
         /// <param name="sort"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public Task<List<PlayerScoresModel.PlayerScore>> GetPlayerScores(long ID, int? limit = null, sort? sort = null, int? page = null)
+        public async Task<List<PlayerScoresModel.PlayerScore>> GetPlayerScores(long ID, int? limit = null, sort? sort = null, int? page = null)
         {
             var extraStatement = "?";
             if (limit != null) extraStatement += $"limit={limit}&";
             if (sort != null) extraStatement += $"sort={sort}&";
             if (page != null) extraStatement += $"page={page}&";
 
-            return Get<List<PlayerScoresModel.PlayerScore>>($"/player/{ID}/scores{extraStatement}");
+            var result = await Get<PlayerScoresModel>($"/player/{ID}/scores{extraStatement}");
+            return result.PlayerScores;
         }
 
         public enum sort

@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScoreSaberLib;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,16 @@ namespace ScoreSaberLibTests
             {
                 var scoreSaberClient = new ScoreSaberClient();
                 var player = await scoreSaberClient.Api.Players.GetPlayers(search: "silverhaze", page: 1, countryCodes: "NL");
-                Assert.IsTrue(player.First().Name == "Silverhaze");
+                var players = new List<ScoreSaberLib.Models.PlayerInfoModel.Player>();
+                for (var i = 0; i < 3; i++)
+                {
+                    var playersData = await scoreSaberClient.Api.Players.GetPlayers(page: i + 1);
+                    players.AddRange(playersData.Players);
+                }
+
+                Assert.IsTrue(players.Count == 150);
+                Assert.IsTrue(players != null);
+                Assert.IsTrue(player.Players.First().Name == "Silverhaze");
             }).GetAwaiter().GetResult();
         }
 
@@ -47,7 +57,7 @@ namespace ScoreSaberLibTests
             Task.Run(async () =>
             {
                 var scoreSaberClient = new ScoreSaberClient();
-                var playerscores = await scoreSaberClient.Api.Players.GetPlayerScores(76561198033166451, limit: 1, sort: Players.sort.top, page: 1);
+                var playerscores = await scoreSaberClient.Api.Players.GetPlayerScores(76561198033166451, limit: 10, sort: Players.sort.top, page: 1);
                 Assert.IsTrue(playerscores.First() != null);
             }).GetAwaiter().GetResult();
         }

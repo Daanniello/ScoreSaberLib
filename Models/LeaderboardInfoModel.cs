@@ -10,16 +10,15 @@ namespace ScoreSaberLib.Models
     public class LeaderboardInfoModel
     {
 
-        public partial class Leaderboards
-        {
-            [JsonProperty("leaderboards")]
-            public List<LeaderboardInfo> LeaderboardsList { get; set; }
 
-            [JsonProperty("totalCount")]
-            public long TotalCount { get; set; }
-        }
+        [JsonProperty("leaderboards")]
+        public List<Leaderboard> Leaderboards { get; set; }
 
-        public partial class LeaderboardInfo
+        [JsonProperty("metadata")]
+        public MetadataInfo Metadata { get; set; }
+
+
+        public partial class Leaderboard
         {
             [JsonProperty("id")]
             public long Id { get; set; }
@@ -40,10 +39,7 @@ namespace ScoreSaberLib.Models
             public string LevelAuthorName { get; set; }
 
             [JsonProperty("difficulty")]
-            public long Difficulty { get; set; }
-
-            [JsonProperty("difficultyRaw")]
-            public string DifficultyRaw { get; set; }
+            public Difficulty Difficulty { get; set; }
 
             [JsonProperty("maxScore")]
             public long MaxScore { get; set; }
@@ -52,28 +48,28 @@ namespace ScoreSaberLib.Models
             public DateTimeOffset CreatedDate { get; set; }
 
             [JsonProperty("rankedDate")]
-            public long RankedDate { get; set; }
+            public object RankedDate { get; set; }
 
             [JsonProperty("qualifiedDate")]
-            public long QualifiedDate { get; set; }
+            public object QualifiedDate { get; set; }
 
             [JsonProperty("lovedDate")]
-            public long LovedDate { get; set; }
+            public object LovedDate { get; set; }
 
             [JsonProperty("ranked")]
-            public long Ranked { get; set; }
+            public bool Ranked { get; set; }
 
             [JsonProperty("qualified")]
-            public long Qualified { get; set; }
+            public bool Qualified { get; set; }
 
             [JsonProperty("loved")]
-            public long Loved { get; set; }
+            public bool Loved { get; set; }
 
             [JsonProperty("maxPP")]
             public long MaxPp { get; set; }
 
             [JsonProperty("stars")]
-            public double Stars { get; set; }
+            public long Stars { get; set; }
 
             [JsonProperty("plays")]
             public long Plays { get; set; }
@@ -91,7 +87,7 @@ namespace ScoreSaberLib.Models
             public Uri CoverImage { get; set; }
 
             [JsonProperty("difficulties")]
-            public List<Difficulty> Difficulties { get; set; }
+            public object Difficulties { get; set; }
         }
 
         public partial class Difficulty
@@ -100,8 +96,27 @@ namespace ScoreSaberLib.Models
             public long LeaderboardId { get; set; }
 
             [JsonProperty("difficulty")]
-            public long DifficultyType { get; set; }
+            public long DifficultyDifficulty { get; set; }
+
+            [JsonProperty("gameMode")]
+            public string GameMode { get; set; }
+
+            [JsonProperty("difficultyRaw")]
+            public string DifficultyRaw { get; set; }
+        }
+
+        public partial class MetadataInfo
+        {
+            [JsonProperty("total")]
+            public long Total { get; set; }
+
+            [JsonProperty("page")]
+            public long Page { get; set; }
+
+            [JsonProperty("itemsPerPage")]
+            public long ItemsPerPage { get; set; }
         }
     }
 }
+
 

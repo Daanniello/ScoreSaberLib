@@ -9,8 +9,25 @@ namespace ScoreSaberLib.Models
 {
     public class LeaderboardScoresModel
     {
+        [JsonProperty("scores")]
+        public List<Score> Scores { get; set; }
 
-        public partial class LeaderboardScores
+        [JsonProperty("metadata")]
+        public MetadataInfo Metadata { get; set; }
+
+        public partial class MetadataInfo
+        {
+            [JsonProperty("total")]
+            public long Total { get; set; }
+
+            [JsonProperty("page")]
+            public long Page { get; set; }
+
+            [JsonProperty("itemsPerPage")]
+            public long ItemsPerPage { get; set; }
+        }
+
+        public partial class Score
         {
             [JsonProperty("id")]
             public long Id { get; set; }
@@ -49,7 +66,7 @@ namespace ScoreSaberLib.Models
             public long MaxCombo { get; set; }
 
             [JsonProperty("fullCombo")]
-            public long FullCombo { get; set; }
+            public bool FullCombo { get; set; }
 
             [JsonProperty("hmd")]
             public long Hmd { get; set; }
@@ -86,3 +103,4 @@ namespace ScoreSaberLib.Models
         }
     }
 }
+

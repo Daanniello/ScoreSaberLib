@@ -19,7 +19,8 @@ namespace ScoreSaberLibTests
                 var scoreSaberClient = new ScoreSaberClient();
                 var leaderboardInfo = await scoreSaberClient.Api.Leaderboards.GetLeaderboardsByFilter(ranked: true, qualified: true, loved: true, minStar: 0, maxStar: 20, category: Leaderboards.Category.starDifficulty, sort: Leaderboards.Sort.ascending, unique: true);
                 //TODO MORE ASSERTS
-                Assert.IsTrue(leaderboardInfo.TotalCount > 0);               
+                Assert.IsTrue(leaderboardInfo.Metadata.Total > 0);
+                Assert.IsTrue(leaderboardInfo.Leaderboards.First() != null);
             }).GetAwaiter().GetResult();
         }
 
@@ -45,7 +46,7 @@ namespace ScoreSaberLibTests
                 var leaderboardFail = await scoreSaberClient.Api.Leaderboards.GetLeaderboardInfoByHashcode("D13D74987C4095E5064B91D2963A96D06561962B", Leaderboards.Difficulty.hard);
                 //TODO MORE ASSERTS
                 Assert.IsTrue(leaderboard.SongHash == "D13D74987C4095E5064B91D2963A96D06561962B");
-                Assert.IsTrue(leaderboard.Difficulty == 7);
+                Assert.IsTrue(leaderboard.Difficulty.DifficultyDifficulty == 7);
                 Assert.IsTrue(leaderboardFail == null);
             }).GetAwaiter().GetResult();
         }
@@ -85,7 +86,7 @@ namespace ScoreSaberLibTests
                 //TODO MORE ASSERTS
                 Assert.IsTrue(leaderboard.First().LeaderboardId == 394359);
                 Assert.IsTrue(leaderboard[1].LeaderboardId == 394355);
-                Assert.IsTrue(leaderboard.First().DifficultyType == 7);
+                Assert.IsTrue(leaderboard.First().DifficultyDifficulty == 7);
             }).GetAwaiter().GetResult();
         }
     }

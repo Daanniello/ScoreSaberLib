@@ -16,7 +16,7 @@ namespace ScoreSaberLibTests
             Task.Run(async () =>
             {
                 var scoreSaberClient = new ScoreSaberClient();
-                var requestedMap= await scoreSaberClient.Api.RankingRequests.GetRequest(6534);
+                var requestedMap = await scoreSaberClient.Api.RankingRequests.GetRequest(6534);
                 Assert.IsTrue(requestedMap.RequestId == 6534);
             }).GetAwaiter().GetResult();
         }

@@ -9,8 +9,25 @@ namespace ScoreSaberLib.Models
 {
     public class PlayerInfoModel
     {
+        [JsonProperty("players")]
+        public List<Player> Players { get; set; }
 
-        public partial class PlayerInfo
+        [JsonProperty("metadata")]
+        public MetadataInfo Metadata { get; set; }
+
+        public partial class MetadataInfo
+        {
+            [JsonProperty("total")]
+            public long Total { get; set; }
+
+            [JsonProperty("page")]
+            public long Page { get; set; }
+
+            [JsonProperty("itemsPerPage")]
+            public long ItemsPerPage { get; set; }
+        }
+
+        public partial class Player
         {
             [JsonProperty("id")]
             public string Id { get; set; }
@@ -37,7 +54,7 @@ namespace ScoreSaberLib.Models
             public string Role { get; set; }
 
             [JsonProperty("badges")]
-            public List<Badge> Badges { get; set; }
+            public object Badges { get; set; }
 
             [JsonProperty("histories")]
             public string Histories { get; set; }
@@ -46,22 +63,13 @@ namespace ScoreSaberLib.Models
             public long Permissions { get; set; }
 
             [JsonProperty("banned")]
-            public long Banned { get; set; }
+            public bool Banned { get; set; }
 
             [JsonProperty("inactive")]
-            public long Inactive { get; set; }
+            public bool Inactive { get; set; }
 
             [JsonProperty("scoreStats")]
             public ScoreStats ScoreStats { get; set; }
-        }
-
-        public partial class Badge
-        {
-            [JsonProperty("description")]
-            public string Description { get; set; }
-
-            [JsonProperty("image")]
-            public Uri Image { get; set; }
         }
 
         public partial class ScoreStats
@@ -85,4 +93,5 @@ namespace ScoreSaberLib.Models
             public long ReplaysWatched { get; set; }
         }
     }
+
 }
