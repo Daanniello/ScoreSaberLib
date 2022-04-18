@@ -8,7 +8,7 @@
     <NeutralLanguage></NeutralLanguage>
     <RepositoryUrl>https://github.com/Daanniello/ScoreSaberLib</RepositoryUrl>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
-    <Version>2.1.0</Version>
+    <Version>2.2.0</Version>
     <PackageReleaseNotes>Package includes the new version of the Scoresaber API with all features.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="websocketsharp.core" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
