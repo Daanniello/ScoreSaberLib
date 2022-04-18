@@ -14,7 +14,7 @@ namespace ScoreSaberLib.Websockets
 
         public ScoreFeed()
         {
-         
+
         }
 
         public void Connect()
@@ -23,12 +23,32 @@ namespace ScoreSaberLib.Websockets
             _webSocket.Connect();
         }
 
+        public void Disconnect()
+        {
+            _webSocket.Close();
+        }
+
+        private class ScoreSaberWebSocketModel
+        {
+            [JsonProperty("commandName")]
+            public string CommandName { get; set; }
+        }
+
         private void _webSocket_OnMessage(object sender, MessageEventArgs e)
         {
-            if(e.Data != "Connected to the ScoreSaber WSS")
+            try
             {
-                var scoreFeedObject = JsonConvert.DeserializeObject<ScoreFeedModel>(e.Data);
-                PlayReceived(scoreFeedObject);
+                if (e.Data == "Connected to the ScoreSaber WSS") return;
+                var webSocketData = JsonConvert.DeserializeObject<ScoreSaberWebSocketModel>(e.Data);
+                if (webSocketData.CommandName == "score")
+                {
+                    var scoreFeedData = JsonConvert.DeserializeObject<ScoreFeedModel>(e.Data);
+                    PlayReceived(scoreFeedData);
+                }
+            }
+            catch
+            {
+                return;
             }
         }
 

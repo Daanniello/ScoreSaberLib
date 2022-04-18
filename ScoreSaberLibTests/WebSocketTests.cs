@@ -27,7 +27,7 @@ namespace ScoreSaberLibTests
 
         private void ScoreFeed_OnPlayReceived(object sender, ScoreSaberLib.Models.ScoreFeedModel e)
         {
-            _webSocketHasPassed = true;
+            if(e.CommandName == "score") _webSocketHasPassed = true;
         }
     }
 }
