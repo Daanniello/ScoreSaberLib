@@ -45,7 +45,7 @@ namespace ScoreSaberLib.Models
             public long MaxScore { get; set; }
 
             [JsonProperty("createdDate")]
-            public DateTimeOffset CreatedDate { get; set; }
+            public DateTimeOffset? CreatedDate { get; set; }
 
             [JsonProperty("rankedDate")]
             public object RankedDate { get; set; }

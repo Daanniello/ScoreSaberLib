@@ -20,7 +20,7 @@ namespace ScoreSaberLib.Models
             public LeaderboardInfo LeaderboardInfo { get; set; }
 
             [JsonProperty("created_at")]
-            public DateTimeOffset CreatedAt { get; set; }
+            public DateTimeOffset? CreatedAt { get; set; }
 
             [JsonProperty("rankVotes")]
             public Votes RankVotes { get; set; }
@@ -80,7 +80,7 @@ namespace ScoreSaberLib.Models
             public long MaxScore { get; set; }
 
             [JsonProperty("createdDate")]
-            public DateTimeOffset CreatedDate { get; set; }
+            public DateTimeOffset? CreatedDate { get; set; }
 
             [JsonProperty("rankedDate")]
             public object RankedDate { get; set; }

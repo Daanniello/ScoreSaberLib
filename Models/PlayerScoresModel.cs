@@ -64,10 +64,10 @@ namespace ScoreSaberLib.Models
             public long MaxScore { get; set; }
 
             [JsonProperty("createdDate")]
-            public DateTimeOffset CreatedDate { get; set; }
+            public DateTimeOffset? CreatedDate { get; set; }
 
             [JsonProperty("rankedDate")]
-            public DateTimeOffset RankedDate { get; set; }
+            public DateTimeOffset? RankedDate { get; set; }
 
             [JsonProperty("qualifiedDate")]
             public DateTimeOffset? QualifiedDate { get; set; }
@@ -166,7 +166,7 @@ namespace ScoreSaberLib.Models
             public long Hmd { get; set; }
 
             [JsonProperty("timeSet")]
-            public DateTimeOffset TimeSet { get; set; }
+            public DateTimeOffset? TimeSet { get; set; }
 
             [JsonProperty("hasReplay")]
             public bool HasReplay { get; set; }

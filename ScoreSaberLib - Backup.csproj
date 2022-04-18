@@ -8,7 +8,7 @@
     <NeutralLanguage></NeutralLanguage>
     <RepositoryUrl>https://github.com/Daanniello/ScoreSaberLib</RepositoryUrl>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
-    <Version>2.2.2</Version>
+    <Version>2.2.1</Version>
     <PackageReleaseNotes>Package includes the new version of the Scoresaber API with all features.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

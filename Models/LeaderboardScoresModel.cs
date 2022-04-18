@@ -72,7 +72,7 @@ namespace ScoreSaberLib.Models
             public long Hmd { get; set; }
 
             [JsonProperty("timeSet")]
-            public DateTimeOffset TimeSet { get; set; }
+            public DateTimeOffset? TimeSet { get; set; }
 
             [JsonProperty("hasReplay")]
             public bool HasReplay { get; set; }

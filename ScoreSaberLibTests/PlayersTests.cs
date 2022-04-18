@@ -57,7 +57,7 @@ namespace ScoreSaberLibTests
             Task.Run(async () =>
             {
                 var scoreSaberClient = new ScoreSaberClient();
-                var playerscores = await scoreSaberClient.Api.Players.GetPlayerScores(76561198033166451, limit: 10, sort: Players.sort.top, page: 1);
+                var playerscores = await scoreSaberClient.Api.Players.GetPlayerScores(76561198180044686, limit: 10, sort: Players.sort.top, page: 1);
                 Assert.IsTrue(playerscores.First() != null);
             }).GetAwaiter().GetResult();
         }
