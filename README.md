@@ -27,7 +27,7 @@ Install with Nuget https://www.nuget.org/packages/ScoreSaberLib/
 `scoresaberClient.API`\
 `scoresaberClient.API.Leaderboards`\
 `scoresaberClient.API.Players`\
-`scoresaberClient.API.RankingRequests`
+`scoresaberClient.API.RankingRequests`\
 `scoresaberClient.API.ScoreFeed`
 
 *Leaderboards*\
