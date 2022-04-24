@@ -11,6 +11,7 @@ namespace ScoreSaberLib.Websockets
     {
         private WebSocket _webSocket = new WebSocket("wss://scoresaber.com/ws");
         public event EventHandler<ScoreFeedModel> OnPlayReceived;
+        public event EventHandler OnDisconnect;
 
         public ScoreFeed()
         {
@@ -20,6 +21,7 @@ namespace ScoreSaberLib.Websockets
         public void Connect()
         {
             _webSocket.OnMessage += _webSocket_OnMessage;
+            _webSocket.OnClose += _webSocket_OnDisconnect;
             _webSocket.Connect();
         }
 
@@ -55,6 +57,12 @@ namespace ScoreSaberLib.Websockets
         protected virtual void PlayReceived(ScoreFeedModel e)
         {
             EventHandler<ScoreFeedModel> handler = OnPlayReceived;
+            handler?.Invoke(this, e);
+        }
+
+        private void _webSocket_OnDisconnect(object sender, CloseEventArgs e)
+        {
+            EventHandler handler = OnDisconnect;
             handler?.Invoke(this, e);
         }
     }
