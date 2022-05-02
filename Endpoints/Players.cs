@@ -1,4 +1,5 @@
 ﻿using ScoreSaberLib.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -73,6 +74,33 @@ namespace ScoreSaberLib
 
             var result = await Get<PlayerScoresModel>($"/player/{ID}/scores{extraStatement}");
             return result.PlayerScores;
+        }
+
+        /// <summary>
+        /// Gets a players recent or top score info by count. Example: count 3 will return the third last played map or top play from the player.
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="sort"></param>
+        /// <param name="count">The count of the map to retrieve. count = 3 for example will return the third most recent played map</param>
+        /// <returns></returns>
+        public async Task<PlayerScoresModel.PlayerScore> GetPlayerScoreByCount(long ID, int count, sort? sort = null)
+        {
+            count -= 1;
+            if (count < 0) count = 0;
+            var page = Math.DivRem(count, 8, out int nr);
+            if (nr == 0)
+            {
+                page -= 1;
+                nr += 8;
+            }
+
+            var extraStatement = "?";
+            if (sort != null) extraStatement += $"sort={sort}&";
+            extraStatement += $"page={page + 1}&";
+
+
+            var result = await Get<PlayerScoresModel>($"/player/{ID}/scores{extraStatement}");
+            return result.PlayerScores[count == 0 ? count : nr];
         }
 
         public enum sort

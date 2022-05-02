@@ -61,5 +61,26 @@ namespace ScoreSaberLibTests
                 Assert.IsTrue(playerscores.First() != null);
             }).GetAwaiter().GetResult();
         }
+
+        [TestMethod]
+        public void GetPlayerScoreByCount()
+        {
+            Task.Run(async () =>
+            {
+                var scoreSaberClient = new ScoreSaberClient();
+                var playerscoresPage1 = await scoreSaberClient.Api.Players.GetPlayerScores(76561198180044686, limit: 10, sort: Players.sort.top, page: 1);
+                var playerscoresPageRecent1 = await scoreSaberClient.Api.Players.GetPlayerScores(76561198180044686, limit: 10, sort: Players.sort.recent, page: 1);
+                var playerscoresPage2 = await scoreSaberClient.Api.Players.GetPlayerScores(76561198180044686, sort: Players.sort.top, page: 2);
+                var playerscore1 = await scoreSaberClient.Api.Players.GetPlayerScoreByCount(76561198180044686, 1, sort: Players.sort.top);
+                var playerscore0 = await scoreSaberClient.Api.Players.GetPlayerScoreByCount(76561198180044686, 0, sort: Players.sort.recent);
+                var playerscore4 = await scoreSaberClient.Api.Players.GetPlayerScoreByCount(76561198180044686, 4, sort: Players.sort.top);
+                var playerscore10 = await scoreSaberClient.Api.Players.GetPlayerScoreByCount(76561198180044686, 10, sort: Players.sort.top);
+
+                Assert.IsTrue(playerscoresPage1.First().Leaderboard.Id == playerscore1.Leaderboard.Id);
+                Assert.IsTrue(playerscoresPageRecent1.First().Leaderboard.Id == playerscore0.Leaderboard.Id);
+                Assert.IsTrue(playerscoresPage1[3].Leaderboard.Id == playerscore4.Leaderboard.Id);
+                Assert.IsTrue(playerscoresPage2[1].Leaderboard.Id == playerscore10.Leaderboard.Id);
+            }).GetAwaiter().GetResult();
+        }
     }
 }
