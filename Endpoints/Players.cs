@@ -36,7 +36,7 @@ namespace ScoreSaberLib
         /// Gets the count of players possibly based on filters
         /// </summary>
         /// <param name="search"></param>
-        /// <param name="countryCodes"></param>
+        /// <param name="countryCodes">example: NL, IE, FR</param>
         /// <returns>int or null</returns>
         public Task<int> GetPlayersCount(string search = null, string countryCodes = null)
         {
@@ -50,7 +50,7 @@ namespace ScoreSaberLib
         /// <summary>
         /// Gets all the players info based on ID
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="ID">The player Scoresaber ID</param>
         /// <returns>PlayerInfo or null</returns>
         public Task<PlayerInfoModel.Player> GetPlayer(long ID)
         {
@@ -60,10 +60,10 @@ namespace ScoreSaberLib
         /// <summary>
         /// Gets scores by player ID with sorts
         /// </summary>
-        /// <param name="ID"></param>
-        /// <param name="limit"></param>
-        /// <param name="sort"></param>
-        /// <param name="page"></param>
+        /// <param name="ID">The player Scoresaber ID</param>
+        /// <param name="limit">The amount you want to retrieve for each page (100 is the max for each page)</param>
+        /// <param name="sort">Top song page or recent song page</param>
+        /// <param name="page">The page number you want to retrieve (normally each page is 8 maps)</param>
         /// <returns></returns>
         public async Task<List<PlayerScoresModel.PlayerScore>> GetPlayerScores(long ID, int? limit = null, sort? sort = null, int? page = null)
         {

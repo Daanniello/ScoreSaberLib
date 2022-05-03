@@ -21,7 +21,7 @@ namespace ScoreSaberLibTests
                 var scoreSaberClient = new ScoreSaberClient();
                 scoreSaberClient.Api.ScoreFeed.Connect();
                 scoreSaberClient.Api.ScoreFeed.OnPlayReceived += ScoreFeed_OnPlayReceived;
-                await Task.Delay(5000);
+                await Task.Delay(10000);
                 Assert.IsTrue(_webSocketHasPassedSubscribe);
             }).GetAwaiter().GetResult();
         }
