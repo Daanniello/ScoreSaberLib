@@ -17,7 +17,7 @@ namespace ScoreSaberLibTests
             Task.Run(async () =>
             {
                 var scoreSaberClient = new ScoreSaberClient();
-                var leaderboardInfo = await scoreSaberClient.Api.Leaderboards.GetLeaderboardsByFilter(ranked: true);
+                var leaderboardInfo = await scoreSaberClient.Api.Leaderboards.GetLeaderboardsByFilter(ranked: true, minStar: 5);
                 //TODO MORE ASSERTS
                 Assert.IsTrue(leaderboardInfo.Metadata.Total > 0);
                 Assert.IsTrue(leaderboardInfo.Leaderboards.First() != null);
