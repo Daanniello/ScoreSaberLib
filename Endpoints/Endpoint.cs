@@ -12,7 +12,7 @@ namespace ScoreSaberLib
 		{
 			using (var client = new HttpClient())
 			{
-				HttpResponseMessage response = await client.GetAsync($"{baseURL}{endpoint.ToLower()}");
+				HttpResponseMessage response = await client.GetAsync($"{baseURL}{endpoint.Replace("True", "true")}");
 				if (!response.IsSuccessStatusCode)
 				{
 					return default(T);
