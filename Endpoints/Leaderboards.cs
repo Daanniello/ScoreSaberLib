@@ -23,10 +23,12 @@ namespace ScoreSaberLib
 		/// <param name="category"></param>
 		/// <param name="sort"></param>
 		/// <param name="unique"></param>
+		/// /// <param name="page"></param>
 		/// <returns>LeaderboardMapsModel.Leaderboards or Null</returns>
-		public async Task<LeaderboardInfoModel> GetLeaderboardsByFilter(bool? ranked = null, bool? qualified = null, bool? loved = null, int? minStar = null, int? maxStar = null, Category? category = null, Sort? sort = null, bool? unique = null)
+		public async Task<LeaderboardInfoModel> GetLeaderboardsByFilter(bool? ranked = null, bool? qualified = null, bool? loved = null, int? minStar = null, int? maxStar = null, Category? category = null, Sort? sort = null, bool? unique = null, int? page = null)
 		{
 			var extraStatement = "?";
+			if (page != null) extraStatement += $"page={page}&";
 			if (ranked != null) extraStatement += $"ranked={ranked}&";
 			if (qualified != null) extraStatement += $"qualified={qualified}&";
 			if (loved != null) extraStatement += $"loved={loved}&";
